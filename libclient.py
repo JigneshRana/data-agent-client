@@ -3,7 +3,9 @@ import selectors
 import json
 import io
 import struct
-
+#import dataagent
+from dataagent import *
+import logger
 
 class Message:
     def __init__(self, selector, sock, addr, request):
@@ -17,6 +19,7 @@ class Message:
         self._jsonheader_len = None
         self.jsonheader = None
         self.response = None
+        self.log = logger.logger(True,False)
 
     def _set_selector_events_mask(self, mode):
         """Set selector to listen for events: mode is 'r', 'w', or 'rw'."""
@@ -45,7 +48,8 @@ class Message:
 
     def _write(self):
         if self._send_buffer:
-            print("sending", repr(self._send_buffer), "to", self.addr)
+            #print("sending", repr(self._send_buffer), "to", self.addr)
+            self.log.logstr("sending"+str(repr(self._send_buffer))+ "to"+ str(self.addr))
             try:
                 # Should be ready to write
                 sent = self.sock.send(self._send_buffer)
@@ -81,6 +85,7 @@ class Message:
         return message
 
     def _process_response_json_content(self):
+        return;
         content = self.response
         result = content.get("result")
         print(f"got result: {result}")
@@ -96,20 +101,25 @@ class Message:
             self.write()
 
     def read(self):
+        self.log.logstr("read...")
         self._read()
 
         if self._jsonheader_len is None:
+            self.log.logstr("read...process_protoheader")
             self.process_protoheader()
 
         if self._jsonheader_len is not None:
             if self.jsonheader is None:
+                self.log.logstr("read...process_jsonheader")
                 self.process_jsonheader()
 
         if self.jsonheader:
             if self.response is None:
+                self.log.logstr("read...process_response")
                 self.process_response()
 
     def write(self):
+        self.log.logstr("write...")
         if not self._request_queued:
             self.queue_request()
 
@@ -121,7 +131,7 @@ class Message:
                 self._set_selector_events_mask("r")
 
     def close(self):
-        print("closing connection to", self.addr)
+        self.log.logstr("closing connection to "+ str(self.addr))
         try:
             self.selector.unregister(self.sock)
         except Exception as e:
@@ -142,7 +152,12 @@ class Message:
             self.sock = None
 
     def queue_request(self):
-        content = self.request["content"]
+        #print(f"request1:",self.request["content"])
+        dataagent = DataAgent(self.request["content"],10)
+        rsdata = dataagent.get_all_data()
+        
+        #content = self.request["content"]
+        content = rsdata
         content_type = self.request["type"]
         content_encoding = self.request["encoding"]
         if content_type == "text/json":
@@ -157,6 +172,8 @@ class Message:
                 "content_type": content_type,
                 "content_encoding": content_encoding,
             }
+        #print(f"request",req)
+        self.log.logstr("request"+str(req))
         message = self._create_message(**req)
         self._send_buffer += message
         self._request_queued = True
