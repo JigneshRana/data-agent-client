@@ -63,7 +63,7 @@ class DataAgent():
         return  self.collectxx("regexm",stg['time'])
 
     def get_custom(self):
-        return  self.collec_custom("after",stg['time'])
+        return  self.collect_custom("after",stg['time'])
 
     def collectxx(self,xxtype,time):
         access_type = ["2xx","3xx","4xx","5xx","timec","regexm"]
@@ -138,27 +138,27 @@ class DataAgent():
             print("File Not Foud")
         return False
 
-    def collec_custom(self,xxtype,time):    
+    def collect_custom(self,xxtype,time):    
         access_type = ["after"]
         self.cust_match = {}
-        if (xxtype in access_type and stg.get('custome')):
+        if (xxtype in access_type and stg.get('custom')):
 
-            for c_item in stg.get('custome'):
+            for c_item in stg.get('custom'):
                 self.log.logstr(c_item)
-                if(stg.get('custome')[c_item]['is_active'] == 1):
+                if(stg.get('custom')[c_item]['is_active'] == 1):
                     s=[]
-                    if (int(stg.get('custome')[c_item]['time']) > 0):
-                        time = int(stg.get('custome')[c_item]['time'])
+                    if (int(stg.get('custom')[c_item]['time']) > 0):
+                        time = int(stg.get('custom')[c_item]['time'])
                         
                         for x in range(time):
                             next_date = datetime.datetime.now() - datetime.timedelta(minutes=x)
-                            s.append(next_date.strftime(stg.get('custome')[c_item]['dateformat']))
+                            s.append(next_date.strftime(stg.get('custom')[c_item]['dateformat']))
                     else:
                         today_date = datetime.datetime.now()
-                        s.append(today_date.strftime(stg.get('custome')[c_item]['dateformat']))
+                        s.append(today_date.strftime(stg.get('custom')[c_item]['dateformat']))
 
-                    cmd="grep -i \""+'\|'.join(s)+"\" "+stg.get('custome')[c_item]['file_path']
-                    cmd=cmd+ " | "+stg.get('custome')[c_item]['after_cmd']
+                    cmd="grep -i \""+'\|'.join(s)+"\" "+stg.get('custom')[c_item]['file_path']
+                    cmd=cmd+ " | "+stg.get('custom')[c_item]['after_cmd']
 
                     self.log.logstr(cmd)
                     output = subprocess.check_output(cmd, shell=True)
