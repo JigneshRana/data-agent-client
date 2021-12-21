@@ -19,7 +19,7 @@ class DataAgent():
         
     def get_all_data(self):
         self.validate_it()
-        self.log.logstr("*********************")
+        #self.log.logstr("*********************")
         return self.resdata
 
     def validate_it(self):
@@ -32,7 +32,7 @@ class DataAgent():
                 self.resdata["4xx"] = self.get_4xx()
                 self.resdata["5xx"] = self.get_5xx()
                 self.resdata["timec"] = self.get_timeconsuming()
-                self.resdata["comsome"] = self.get_custome()
+                self.resdata["custom"] = self.get_custom()
                 self.resdata["services"] = self.check_service()
                 self.resdata["command"] = self.exe_command()
                 self.resdata["phpe"] = self.get_phperror("E",stg['time'])
@@ -62,8 +62,8 @@ class DataAgent():
     def get_regexmatch(self):
         return  self.collectxx("regexm",stg['time'])
 
-    def get_custome(self):
-        return  self.collec_custome("after",stg['time'])
+    def get_custom(self):
+        return  self.collec_custom("after",stg['time'])
 
     def collectxx(self,xxtype,time):
         access_type = ["2xx","3xx","4xx","5xx","timec","regexm"]
@@ -138,7 +138,7 @@ class DataAgent():
             print("File Not Foud")
         return False
 
-    def collec_custome(self,xxtype,time):    
+    def collec_custom(self,xxtype,time):    
         access_type = ["after"]
         self.cust_match = {}
         if (xxtype in access_type and stg.get('custome')):

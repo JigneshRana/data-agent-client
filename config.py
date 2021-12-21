@@ -12,7 +12,7 @@ setting = {
         "phpW":"php7:warn",
         "phpE":"php7:errors"
     },
-    "custome" :{
+    "custom" :{
         "iplist_json1":{
             "is_active":1,
             "file_path":"/media/jignesh/Data/data-agent-client/samplelog/access.log",
