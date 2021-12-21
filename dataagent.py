@@ -193,7 +193,7 @@ class DataAgent():
                 self.log.logstr(c_item)
                 if(stg.get('command')[c_item]['is_active'] == 1):
                     cmd=stg.get('command')[c_item]['commstr']
-                    self.log.logstr(cmd)
+                    self.log.logstr(str(cmd))
                     output = subprocess.check_output(cmd, shell=True)
                     #convert output to utf-8 and remove \n from the last
                     self.cust_match[c_item] =  str(output,"utf-8").rstrip("\n")
