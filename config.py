@@ -10,7 +10,7 @@ setting = {
         "regex_match":" @@[0-9][0-9][0-9]+",
         "phpN":"php7:notice",
         "phpW":"php7:warn",
-        "phpE":"php7:errors"
+        "phpE":"php7:error"
     },
     "custom" :{
         "iplist_json1":{
