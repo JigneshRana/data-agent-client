@@ -3,11 +3,12 @@
 import sys
 import os
 import datetime
+from config import setting as stg
 
 class logger():
     def __init__(self, debug,verbose):
         self.string = ""
-        self.debug = debug
+        self.debug = stg['debug']
         self.verbose = verbose
         self.logdir = "debuglog/"
         self.logpre = "debug_"
