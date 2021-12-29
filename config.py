@@ -13,20 +13,13 @@ setting = {
         "phpE":"php7:error"
     },
     "custom" :{
-        "iplist_json1":{
+        "access_count_ip_top10":{
             "is_active":1,
             "file_path":"/home/logdrive/apache2/access.log",
             "dateformat":"%d/%b/%Y:%H:%M",
-            "time":"10",
+            "time":"10", # 0 equal to current date time as per format.
             "after_cmd":'awk -F" " \'{if($2!="-") print $2}\' | sed \'s/"GET\|"POST\|,//g\' | sort -n | uniq -c | sort -nr | head -10 | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
-            },
-        "iplist_json2":{
-            "is_active":1,
-            "file_path":"/home/logdrive/apache2/access.log",
-            "dateformat":"%d/%b/%Y",
-            "time":"0", # 0 equal to current date time as per format.
-            "after_cmd":'awk -F" " \'{if($2!="-") print $2}\' | sed \'s/"GET\|"POST\|,//g\' | sort -n | uniq -c | sort -nr | head -10 | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
-            }
+            }        
     },
     "service" :{
         "dsagent":{
