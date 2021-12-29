@@ -1,5 +1,5 @@
 setting = {
-    "debug":True,
+    "debug":False,
     "time":10,
     "apache": {
         "accesslog_path":"/home/logdrive/apache2/access.log",
