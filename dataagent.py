@@ -167,7 +167,7 @@ class DataAgent():
                     output = subprocess.check_output(cmd, shell=True)
                     #convert output to utf-8 and remove \n from the last
                    
-                    self.cust_match[c_item] =  str(output,"utf-8").rstrip("\n")
+                    self.cust_match[c_item] =  eval(str(output,"utf-8").rstrip("\n"))
 
         return self.cust_match
 
