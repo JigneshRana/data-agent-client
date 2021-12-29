@@ -108,6 +108,7 @@ class DataAgent():
 
     def get_phperror(self,etype,time):
         error_type = ["E","W","N"]
+        self.log.logstr("get_phperror:"+str(etype))
 
         if (etype in error_type):
             if(os.path.exists(stg.get('apache')['errorlog_path'])):
@@ -129,6 +130,8 @@ class DataAgent():
                 
                 cmd=cmd+" | wc -l"
                 
+                self.log.logstr(str(cmd))
+
 
                 output = subprocess.check_output(cmd, shell=True)
                 #output = os.system(cmd)
