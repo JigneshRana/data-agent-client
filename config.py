@@ -4,7 +4,7 @@ setting = {
         "accesslog_path":"/home/logdrive/apache2/access.log",
         "errorlog_path":"/home/logdrive/apache2/error.log",
         "accesslog_dateformat":"%d/%b/%Y:%H:%M",
-        "errorlog_dateformat":"%d/%b/%Y:%H:%M",
+        "errorlog_dateformat":"%a %b %d %H:%M",
         "2xx_match":"@@@2","3xx_match":"@@@3","4xx_match":"@@@4","5xx_match":"@@@5",
         "time_consuming":" @@[0-9][0-9][0-9]+",
         "regex_match":" @@[0-9][0-9][0-9]+",
