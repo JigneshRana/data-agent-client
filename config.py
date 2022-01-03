@@ -1,6 +1,7 @@
 setting = {
     "debug":False,
     "time":10,
+    "group":"App",
     "apache": {
         "accesslog_path":"/home/logdrive/apache2/access.log",
         "errorlog_path":"/home/logdrive/apache2/error.log",
@@ -43,38 +44,47 @@ setting = {
         "apachectl_totaltraffic_mb":{
             "is_active":1,
             "commstr":"apachectl status | grep 'Total Traffic:' | awk -F\" \" '{print $7}'",
+            "tag":"apachectl"
             },
         "apachectl_requests_being_processed":{
             "is_active":1,
             "commstr":"apachectl status | grep 'requests currently being processed' | awk -F\" \" '{print int($1)}'",
+            "tag":"apachectl"
             },
         "apachectl_idle_workers":{
             "is_active":1,
             "commstr":"apachectl status | grep 'requests currently being processed' | awk -F\" \" '{print int($6)}'",
+            "tag":"apachectl"
             },
         "apachectl_req_count_sec":{
             "is_active":1,
             "commstr":"apachectl status | grep 'requests/sec' | awk -F\" \" '{print int($1)}'",
+            "tag":"apachectl"
             },
         "apachectl_bite_sec":{
             "is_active":1,
             "commstr":"apachectl status | grep 'requests/sec' | awk -F\" \" '{print int($4)}'",
+            "tag":"apachectl"
             },
         "apachectl_kb_per_req":{
             "is_active":1,
             "commstr":"apachectl status | grep 'requests/sec' | awk -F\" \" '{print int($7)}'",
+            "tag":"apachectl"
             },
         "apachectl_ms_per_req":{
             "is_active":1,
             "commstr":"apachectl status | grep 'requests/sec' | awk -F\" \" '{print int($10)}'",
+            "tag":"apachectl"
             },
         "ps_php":{
             "is_active":1,
             "commstr":"ps -auxw | grep '\.php' | grep -v 'grep' | wc -l",
+            "tag":"ps_php"
             },
         "ps_sh":{
             "is_active":1,
             "commstr":"ps -auxw | grep '\.sh' | grep -v 'grep' | wc -l",
+            "tag":"ps_sh"
             }
     }
 }
