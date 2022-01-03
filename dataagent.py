@@ -26,8 +26,8 @@ class DataAgent():
         #print("Type of dict_obj", type(self.dataobj))
         if(type(self.dataobj) is dict):
             if(self.dataobj['action'] == "get" and self.dataobj['value'] == "all"):
-                self.dataobj["stack"] = stg['group']
-                self.dataobj["time"] = stg['time']
+                self.resdata["stack"] = stg['group']
+                self.resdata["time"] = stg['time']
                 self.resdata["2xx"] = self.get_2xx()
                 self.resdata["3xx"] = self.get_3xx()
                 self.resdata["4xx"] = self.get_4xx()
