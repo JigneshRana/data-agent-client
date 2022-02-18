@@ -21,7 +21,21 @@ setting = {
             "dateformat":"%d/%b/%Y:%H:%M",
             "time":"10", # 0 equal to current date time as per format.
             "after_cmd":'awk -F" " \'{if($2!="-") print $2}\' | sed \'s/"GET\|"POST\|,//g\' | sort -n | uniq -c | sort -nr | head -10 | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
-            }        
+            },
+        "pms_req_count":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_interface_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":"5", # 0 equal to current date time as per format.
+            "after_cmd":' wc -l'
+            },
+        "pms_req_count":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_interface_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":"5", # 0 equal to current date time as per format.
+            "after_cmd":' awk -F"#" \'{D+=$8} END {print D}\''
+            }         
     },
     "service" :{
         "dsagent":{
