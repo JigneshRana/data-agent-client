@@ -29,7 +29,7 @@ setting = {
             "time":"5", # 0 equal to current date time as per format.
             "after_cmd":' wc -l'
             },
-        "pms_req_count":{
+        "pms_day_sum":{
             "is_active":1,
             "file_path":"/home/saasfinal/logs/pms_interface_*.log",
             "dateformat":"%Y-%m-%d %H:%M",
