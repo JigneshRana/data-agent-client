@@ -41,7 +41,7 @@ setting = {
             "file_path":"/home/saasfinal/logs/pms_interface_*.log",
             "dateformat":"%Y-%m-%d %H:%M",
             "time":"5", # 0 equal to current date time as per format.
-            "after_cmd":' awk -F"#" \'{print $5}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a= "\""$2"\":\""$1"\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            "after_cmd":' awk -F"#" \'{print $5}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
             }         
     },
     "service" :{
