@@ -42,7 +42,51 @@ setting = {
             "dateformat":"%Y-%m-%d %H:%M",
             "time":"5", # 0 equal to current date time as per format.
             "after_cmd":' awk -F"#" \'{print $5}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
-            }         
+            },
+        "pms_th_req_list_actions":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_threshold_logs_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":0, # 0 equal to current date time as per format.
+            "after_cmd":' awk -F"#" \'{print $6}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            },
+        "pms_th_req_list_pms":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_threshold_logs_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":0, # 0 equal to current date time as per format.
+            "after_cmd":' awk -F"#" \'{print $3}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            },
+        "pms_th_req_list_endpoint":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_threshold_logs_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":0, # 0 equal to current date time as per format.
+            "after_cmd":' awk -F"#" \'{print $4}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            },
+        "pms_th_req_list_ip_gt_100":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_threshold_logs_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":5, # 0 equal to current date time as per format.
+            "after_cmd":' awk -F"#" \'{print $5}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{if ($1 > 100) a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            },
+        "pms_th_req_list_hc_gt_100":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_threshold_logs_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":5, # 0 equal to current date time as per format.
+            "after_cmd":' awk -F"#" \'{print $7}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{if ($1 > 100) a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            },
+        "pms_th_days_list_hc_gt_100":{
+            "is_active":1,
+            "file_path":"/home/saasfinal/logs/pms_threshold_logs_*.log",
+            "dateformat":"%Y-%m-%d %H:%M",
+            "time":5, # 0 equal to current date time as per format.
+            "after_cmd":' awk -F"#" \'{print $7 $8}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a[$2] +=int($1);}END {for (i in a) if(a[i]>100) print a[i],"",i}\' | sort -nr | awk -F" " \'{if ($1 > 100) a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            }
+
+
     },
     "service" :{
         "dsagent":{
