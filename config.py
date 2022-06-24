@@ -83,7 +83,7 @@ setting = {
             "file_path":"/home/saasfinal/logs/pms_threshold_logs_*.log",
             "dateformat":"%Y-%m-%d %H:%M",
             "time":5, # 0 equal to current date time as per format.
-            "after_cmd":' awk -F"#" \'{print $7}\' | sort -nr | uniq -c | sort -nr | awk -F" " \'{a[$2] +=int($1);}END {for (i in a) if(a[i]>100) print a[i],"",i}\' | sort -nr | awk -F" " \'{if ($1 > 100) a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
+            "after_cmd":' awk -F"#" \'{print $7" "$8}\' | sort -nr | awk -F" " \'{a[$1] +=int($2);}END {for (i in a) if(a[i]>100) print a[i],"",i}\' | sort -nr | awk -F" " \'{if ($1 > 100) a= "\\""$2"\\":\\""$1"\\","a }END { print "{"substr (a,1,length(a)-1)"}" }\''
             }
 
 
