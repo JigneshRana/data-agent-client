@@ -3,7 +3,16 @@
 import sys
 import os
 import datetime
-from config import setting as stg
+group = os.getenv("DATA_AGENT_CONF", default=None)
+if (group == "local"):
+    from config_local import setting as stg
+elif (group == "interface"):
+    from config_interface import setting as stg
+elif (group == "distari"):
+    from config_distari import setting as stg    
+else:
+    from config import setting as stg
+
 
 class logger():
     def __init__(self, debug,verbose):

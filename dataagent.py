@@ -4,11 +4,19 @@ import argparse
 import json
 import os
 import datetime
-from config import setting as stg
+
+group = os.getenv("DATA_AGENT_CONF", default=None)
+if (group == "local"):
+    from config_local import setting as stg
+elif (group == "interface"):
+    from config_interface import setting as stg
+elif (group == "distari"):
+    from config_distari import setting as stg    
+else:
+    from config import setting as stg
+
 import subprocess
 import logger
-
-stg['time']
 class DataAgent():
 
     def __init__(self, dataobj,time):
@@ -16,6 +24,7 @@ class DataAgent():
         self.time = time
         self.resdata = {}
         self.log = logger.logger(True,False)
+        self.log.logstr("group >>> "+str(stg['group_lable']))
         
     def get_all_data(self):
         self.validate_it()
@@ -148,8 +157,8 @@ class DataAgent():
         if (xxtype in access_type and stg.get('custom')):
 
             for c_item in stg.get('custom'):
-                self.log.logstr(c_item)
                 if(stg.get('custom')[c_item]['is_active'] == 1):
+                    self.log.logstr(c_item)
                     s=[]
                     if (int(stg.get('custom')[c_item]['time']) > 0):
                         time = int(stg.get('custom')[c_item]['time'])
